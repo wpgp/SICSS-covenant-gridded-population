@@ -196,7 +196,7 @@ summary(health_facilities_Ado_maternity_distance_pop[])
 health_facilities_Ado_maternity_buffered8km <- st_buffer(health_facilities_Ado_maternity, dist=set_units(8, km))
 
 health_facilities_Ado_maternity_buffered8km_rasterized <- rasterize(health_facilities_Ado_maternity_buffered8km, pop_Ado, field=1)
-plot(health_facilities_Ado_maternity_buffered_rasterized)
+plot(health_facilities_Ado_maternity_buffered8km_rasterized)
 
 pop_Ado_masked_maternity_8km <- mask(pop_Ado, health_facilities_Ado_maternity_buffered8km_rasterized, inverse=T)
 plot(pop_Ado_masked_maternity_8km)
