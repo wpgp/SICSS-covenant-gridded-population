@@ -27,6 +27,11 @@ This tutorial covers the concepts of:
 - zonal statistics
 - masking
 
+## Contents
+
+The script [`for_students.R`](for_students.R) contains the workflow with the questions.
+The script [`teaching.R`](teaching.R) contains the workflow with the answers.
+The powerpoint [`SICSS_20220624_griddedPop.pptx`](SICSS_20220624_griddedPop.pptx) contains the presentation.
 
 ## Data used
 
