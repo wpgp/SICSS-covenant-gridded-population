@@ -224,7 +224,18 @@ health_facilities_maternity_buffered8km <- st_buffer(health_facilities_maternity
 health_facilities_maternity_buffered8km_rasterized <- rasterize(health_facilities_maternity_buffered8km, pop, field=1)
 pop_masked_maternity_8km <- mask(pop, health_facilities_maternity_buffered8km_rasterized, inverse=T)
 
-
-
 tm_shape(pop_masked_maternity_8km)+
-  tm_raster()
+  tm_raster()+
+  tm_basemap('CartoDB.DarkMatter')
+
+lga_pop_masked_maternity_8km <- raster::extract(pop_masked_maternity_8km, lga, fun=sum, na.rm=T,df=T)
+
+lga$nonCovered_women <- lga_pop_masked_maternity_8km$NGA_population_v2_0_gridded
+lga$nonCovered_women_perc <- round(lga$nonCovered_women / lga$mean * 100, 2)
+
+tm_shape(lga)+
+  tm_polygons(col='nonCovered_women_perc', id='nonCovered_women_perc', title='%women per LGA')+
+  tm_shape(health_facilities_maternity)+
+  tm_dots(size=0.1, legend.show = T)+
+  tm_add_legend(type='symbol', labels='Maternity', col='black')+
+  tm_layout( main.title = 'Women of childbearing age at more than 8km from a maternity')
